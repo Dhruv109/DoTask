@@ -2,24 +2,24 @@ const express = require("express");
 const bycrypt = require("bcrypt");
 const cors = require("cors");
 const passport = require("passport");
-const initialize = require("./passport.js");
-const initialiseGoogle = require("./passportGoogle.js");
+const initialize = require("./passport/passport.js");
+const initialiseGoogle = require("./passport/passportGoogle.js");
 const flash = require("express-flash");
 const session = require("express-session");
 const path = require("path");
 const mongoose = require("mongoose");
 const methodOverride = require("method-override");
 require("dotenv").config({ path: __dirname + "/.env" });
-const User = require("./user");
-const googleUser = require("./googleUser");
+const User = require("./models/user");
+const googleUser = require("./models/googleUser");
 mongoose.connect(
   process.env.DB,
   { useNewUrlParser: true, useUnifiedTopology: true },
   () => console.log("connect to db")
 );
-const router = require("./routes");
-const groupRouter = require("./grouproutes");
-const indiGroupRouter = require("./indiGroupRoutes");
+const router = require("./routes/routes");
+const groupRouter = require("./routes/grouproutes");
+const indiGroupRouter = require("./routes/indiGroupRoutes");
 initialiseGoogle(passport, async (id) => await User.findOne({ _id: id }));
 
 initialize(

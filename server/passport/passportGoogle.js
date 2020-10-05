@@ -2,7 +2,7 @@ const passport = require("passport");
 
 const googleStrategy = require("passport-google-oauth20").Strategy;
 require("dotenv").config();
-const googleUser = require("./googleUser.js");
+const googleUser = require("../models/googleUser.js");
 
 function initialiseGoogle(passport, getUserById) {
   const authenticateFromGoggle = async (

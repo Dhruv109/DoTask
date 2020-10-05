@@ -1,6 +1,6 @@
 const router = require("express").Router();
-const User = require("./user");
-const googleUser = require("./googleUser");
+const User = require("../models/user");
+const googleUser = require("../models/googleUser");
 
 router.get("/getname", async (req, res) => {
   try {

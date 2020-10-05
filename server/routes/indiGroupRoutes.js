@@ -1,6 +1,6 @@
 const router = require("express").Router();
-const Group = require("./groupUser");
-const googleUser = require("./googleUser");
+const Group = require("../models/groupUser");
+const googleUser = require("../models/googleUser");
 
 router.get("/getname/:id", async (req, res) => {
   try {

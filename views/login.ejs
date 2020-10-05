@@ -1,0 +1,56 @@
+<link
+  rel="stylesheet"
+  href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+  integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+  crossorigin="anonymous"
+/>
+<link type="text/css" rel='stylesheet' href='/cssforejs.css' />
+
+
+<body>
+
+
+<div class="container">
+<h2>LOGIN</h2>
+        <form action="/login" method="POST">
+          <div>
+          <label for="email">Email</label>
+          <input type="email" name="email" class="email" required />
+          <label for="password">Password</label>
+          <input
+            type="password"
+            name="password"
+            class="password"
+            required
+          />
+        </div>
+          <button type="submit" class="login-btn">Login</button>
+        </form>
+
+        <div class="error">
+          <% if(messages.error){%>
+            <h4 class="ml-2"><%=messages.error%></h4>
+            <%}%>
+            
+        </div>
+
+  
+  <div class="option">
+    <p>Or login with</p>
+    <a
+    href="./auth/google"
+    class="google"
+    ><button>   
+    <i class="fa fa-google"></i></button></a
+    >
+</div>
+<p>Not a member? <a
+  href="./register"
+  class="register"
+  >Register now</a
+></p>
+</div>
+
+</div>
+<script src="https://use.fontawesome.com/bfda3162c3.js"></script>
+</body>

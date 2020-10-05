@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Group</title>
+    <link rel="stylesheet" href="group.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header>
+      <h2 class="head">Make your groups here</h2>
+      <a class="home" href="../index.html">Home</a>
+      <form action="/logout?_method=DELETE" method="POST">
+        <button class="logout" type="submit" value="ignore" formnovalidate>
+          Log Out
+        </button>
+      </form>
+    </header>
+    <form class="form">
+      <label for="group-name">Group name</label>
+      <input type="text" name="group-name" id="name" required />
+      <label for="members"
+        >Group members email <span>(seperated by commas)</span></label
+      >
+      <input type="text" id="members" name="group-members" required />
+      <button class="btn" type="submit">New Group</button>
+    </form>
+    <h2 class="subhead">Your Groups</h2>
+    <div class="container">
+      <ul class="group-list"></ul>
+    </div>
+    <script src="group.js"></script>
+  </body>
+</html>

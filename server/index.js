@@ -12,6 +12,13 @@ const methodOverride = require("method-override");
 require("dotenv").config({ path: __dirname + "/.env" });
 const User = require("./models/user");
 const googleUser = require("./models/googleUser");
+const socketio = require("socket.io");
+
+const http = require("http");
+const app = express();
+const server = http.createServer(app);
+const io = socketio(server);
+
 mongoose.connect(
   process.env.DB,
   { useNewUrlParser: true, useUnifiedTopology: true },
@@ -27,7 +34,6 @@ initialize(
   async (email) => await User.findOne({ email: email }),
   async (id) => await User.findOne({ _id: id })
 );
-const app = express();
 
 app.set("view-engine", "ejs");
 
@@ -120,6 +126,17 @@ app.use(function (req, res, next) {
 
 app.use(express.static(path.join(__dirname, "/public/")));
 
+io.on("connection", (socket) => {
+  console.log("new io");
+  //catching todo
+  socket.on("joinGroup", (group) => {
+    socket.join(group);
+    socket.on("todo", ({ todo, name }) => {
+      io.to(group).emit("todoValue", { todo, name });
+    });
+  });
+});
+
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname + "/public/", `index.html`));
 });
@@ -136,4 +153,4 @@ function checkNotAuthenticated(req, res, next) {
   next();
 }
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log("Listening on port 3000"));
+server.listen(PORT, () => console.log("Listening on port 3000"));

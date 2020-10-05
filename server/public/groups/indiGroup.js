@@ -7,7 +7,8 @@ const header = document.querySelector(".head");
 const select = document.querySelector(".select");
 const inp = document.querySelector(".inp");
 const logout = document.querySelector(".logout");
-
+const socket = io();
+let group;
 let complete = [],
   todos = [];
 
@@ -50,57 +51,31 @@ async function fetchname() {
   fetch(`./api/indigroup/getname/${groupID}`)
     .then((response) => response.text())
     .then((result) => {
+      group = result;
+      socket.emit("joinGroup", group);
       document.querySelector(".head").innerText += ` ${result.toUpperCase()}`;
     });
 }
+
+socket.on("todoValue", ({ todo, name }) => {
+  console.log(todo, name);
+  addTodoDiv(todo, name);
+});
 
 function addTodo(event) {
   //prevent default action ie form to submit
   event.preventDefault();
   if (todoInput.value != "") {
-    //add todo div
-    const todoDiv = document.createElement("div");
-    todoDiv.classList.add("todo");
-
-    const userName = document.createElement("span");
-    userName.classList.add("name-span");
+    //emit message to server
+    let todo = todoInput.value;
     fetch("/api/user/getname")
       .then((res) => res.text())
-      .then((name) => (userName.innerText = `${name}: `));
-    todoDiv.appendChild(userName);
-
-    //Create li
-    const newTodo = document.createElement("li");
-    newTodo.classList.add("todo-item");
-    newTodo.innerText = todoInput.value;
-    todoDiv.appendChild(newTodo);
-
+      .then((name) => {
+        saveLocalTodos(todoInput.value);
+        makeComplete();
+        socket.emit("todo", { todo, name });
+      });
     //add todo to localstorage
-    saveLocalTodos(todoInput.value);
-    makeComplete();
-
-    //task completed button
-    const completedButton = document.createElement("button");
-    completedButton.innerHTML = '<i class="fa fa-check"></i>';
-    completedButton.classList.add("completed-btn");
-    todoDiv.appendChild(completedButton);
-
-    const editButton = document.createElement("button");
-    editButton.innerHTML = '<i class="fa fa-pencil"></i>';
-    editButton.classList.add("edit-btn");
-    todoDiv.appendChild(editButton);
-
-    //delete task button
-    const deleteButton = document.createElement("button");
-    deleteButton.innerHTML = '<i class="fa fa-trash"></i>';
-    deleteButton.classList.add("delete-btn");
-    todoDiv.appendChild(deleteButton);
-
-    //Append div to ul
-    todoList.appendChild(todoDiv);
-
-    //clear writer
-    todoInput.value = "";
   } else {
     todoInput.classList.add("shake");
     todoInput.addEventListener("animationend", () => {
@@ -113,7 +88,7 @@ function checkDelete(e) {
   const item = e.target;
   if (item.classList[0] == "edit-btn") {
     const todo = item.parentElement;
-    todoInput.value = todo.innerText;
+    todoInput.value = todo.children[1].innerText;
     todoInput.focus();
     removelocalTodos(todo);
     todo.remove();
@@ -257,7 +232,6 @@ function getTodos() {
         .then((response) => response.json())
         .then((complete) => {
           const Todos = todoList.childNodes;
-          console.log(Todos[0].children);
           for (let i = 0; i < Todos.length; ++i) {
             if (complete[i]) {
               Todos[i].children[1].classList.toggle("completed");
@@ -338,4 +312,49 @@ async function fetchtodo() {
     .then((res) => {
       todos = res;
     });
+}
+
+function addTodoDiv(todo, username) {
+  //add todo div
+  const todoDiv = document.createElement("div");
+  todoDiv.classList.add("todo");
+
+  const userName = document.createElement("span");
+  userName.classList.add("name-span");
+  if (!username) {
+    fetch("/api/user/getname")
+      .then((res) => res.text())
+      .then((name) => (userName.innerText = `${name}: `));
+  } else {
+    userName.innerText = username;
+  }
+  todoDiv.appendChild(userName);
+
+  //Create li
+  const newTodo = document.createElement("li");
+  newTodo.classList.add("todo-item");
+  newTodo.innerText = todo;
+  todoDiv.appendChild(newTodo);
+  //task completed button
+  const completedButton = document.createElement("button");
+  completedButton.innerHTML = '<i class="fa fa-check"></i>';
+  completedButton.classList.add("completed-btn");
+  todoDiv.appendChild(completedButton);
+
+  const editButton = document.createElement("button");
+  editButton.innerHTML = '<i class="fa fa-pencil"></i>';
+  editButton.classList.add("edit-btn");
+  todoDiv.appendChild(editButton);
+
+  //delete task button
+  const deleteButton = document.createElement("button");
+  deleteButton.innerHTML = '<i class="fa fa-trash"></i>';
+  deleteButton.classList.add("delete-btn");
+  todoDiv.appendChild(deleteButton);
+
+  //Append div to ul
+  todoList.appendChild(todoDiv);
+
+  //clear writer
+  todoInput.value = "";
 }

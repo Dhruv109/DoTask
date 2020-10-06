@@ -1,6 +1,8 @@
 const router = require("express").Router();
 const Group = require("../models/groupUser");
 const googleUser = require("../models/googleUser");
+const User = require("../models/user");
+const mongoose = require("mongoose");
 
 router.get("/getname/:id", async (req, res) => {
   try {
@@ -137,6 +139,26 @@ router.put("/deletetodo/:id", async (req, res) => {
     res.status(400).send("not deleted");
   }
 });
+
+router.put("/leavegroup/:id", async (req, res) => {
+  try {
+    const user = await getUser(req);
+    await Group.updateOne(
+      { _id: req.params.id },
+      { $pull: { members: user.user.email } }
+    );
+    const myUser = user.isGoogle ? googleUser : User;
+    await myUser.updateOne(
+      { _id: user.user._id },
+      { $pull: { groups: mongoose.Types.ObjectId(req.params.id) } }
+    );
+    console.log("user leaving", req.params.id, user.user._id, myUser);
+    res.send("user leaving");
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 async function getUser(req) {
   let isGoogle = true;
   let user = await googleUser.findOne({ _id: req.session.passport.user });

@@ -5,7 +5,8 @@
 }
 
 body {
-  background-image: linear-gradient(120deg, #f6d365, #f58b6e);
+  /* background-image: linear-gradient(120deg, #f6d365, #f58b6e); */
+  background-color: rgb(51, 51, 51);
   color: white;
   font-family: "poppins", sans-serif;
   min-height: 100vh;
@@ -13,50 +14,61 @@ body {
 header {
   font-size: 1.5rem;
   width: 100%;
+  background-color: rgb(238, 238, 238);
+  color: black;
+  /* box-shadow: 0 10px 20px 10px rgba(0, 0, 0, 1); */
 }
 input::placeholder {
-  font-size: 20px;
+  font-size: clamp(1rem, 2.5vw, 2rem);
   opacity: 0.5;
 }
 
 .logout {
   padding: 1em;
   border: none;
-  outline: 2px solid white;
-  color: white;
+  color: orange;
   cursor: pointer;
-  background: none;
+  background-color: rgb(255, 255, 255);
   font-size: 0.6em;
   letter-spacing: 2px;
-  position: absolute;
-  right: 5%;
   transition: all 0.2s ease-in-out;
 }
 .logout:hover {
-  background-color: white;
-  color: orange;
+  background-color: orange;
+  color: white;
 }
 
 a {
   text-decoration: none;
-  color: white;
+  color: black;
+  font-size: clamp(14px, 22px, 26px);
 }
-
+.home {
+  border-bottom: 1px solid orange;
+}
+.head {
+  font-size: clamp(20px, 3vw, 40px);
+}
 header,
 form {
-  min-height: 20vh;
+  min-height: 15vh;
   display: flex;
   justify-content: space-around;
   align-items: center;
 }
-
+.nav {
+  width: 30%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
 form input,
 form button {
   padding: 0.5rem;
-  font-size: 2rem;
+  font-size: clamp(1rem, 2.5vw, 2rem);
   border: none;
   background-color: white;
-  box-shadow: 2px 2px 2px 1px rgb(158, 150, 150);
+  /* box-shadow: 2px 2px 2px 1px rgb(158, 150, 150); */
 }
 form button {
   color: #f58b6e;
@@ -73,6 +85,7 @@ form button:hover {
   justify-content: center;
   align-items: center;
   flex-direction: row;
+  margin-bottom: 1rem;
 }
 .todo-list {
   min-width: 50%;
@@ -82,7 +95,7 @@ form button:hover {
   margin: 0.5rem;
   background: white;
   color: black;
-  font-size: 1.5rem;
+  font-size: clamp(0.8rem, 2vw, 1.5rem);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -127,7 +140,7 @@ form button:hover {
 .delete-btn,
 .edit-btn {
   border: none;
-  padding: 1rem;
+  padding: clamp(0.5rem, 2vw, 1rem);
   cursor: pointer;
   font-size: 1rem;
   background-color: white;
@@ -197,10 +210,12 @@ select {
   outline: none;
   border: none;
   color: #e47353;
-  width: 13rem;
+  width: clamp(10rem, 3vw, 13rem);
   cursor: pointer;
   padding: 1rem;
   letter-spacing: 1px;
+  font-size: clamp(0.7rem, 1.5vw, 1rem);
+  padding: clamp(0.5rem, 1vw, 1rem);
 }
 .select {
   margin: 3rem;
@@ -215,7 +230,7 @@ select {
 
   top: 0;
   right: 0;
-  padding: 1rem;
+  padding: clamp(0.5rem, 1vw, 1rem);
   pointer-events: none;
   transition: all 0.3s ease;
   background: white;
@@ -228,22 +243,42 @@ select {
 .inp {
   display: flex;
 }
+a {
+  font-size: clamp(15px, 1.5vw, 22px);
+}
 
 @media only screen and (max-width: 800px) {
-  header,
-  form {
-    min-height: 20vh;
+  header {
+    width: 100%;
+    min-height: 15vh;
+    flex-direction: column;
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
   }
+  .nav {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    padding: 0;
+    margin: 0;
+    height: 10vh;
+  }
+
   h1 {
     font-size: 1.3em;
+    margin-top: 1rem;
   }
 
   .logout {
-    padding: 10px;
     font-size: 0.5em;
+  }
+  .form {
+    flex-direction: column;
+    margin-top: 2rem;
+    min-height: 10vh;
+  }
+  .select::after {
+    padding: 0.2em clamp(0.5rem, 1vw, 1rem);
   }
 }

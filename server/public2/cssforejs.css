@@ -126,7 +126,7 @@ form button {
 .option button {
   border: 1px solid gray;
   background-color: white;
-  padding: 0.5em 2em;
+  padding: 0.4em 2em;
   color: #4285f4;
 }
 
@@ -157,5 +157,21 @@ h4 {
 
 .fa-google {
   color: #38cc38;
+}
+
+@media (max-width: 650px) {
+  .container {
+    height: 65vh;
+    width: 300px;
+  }
+  form {
+    height: 45%;
+  }
+  .option button {
+    padding: 0.3em 2em;
+  }
+  .register-form {
+    height: 60%;
+  }
 }
 /*# sourceMappingURL=cssforejs.css.map */

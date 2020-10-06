@@ -12,13 +12,16 @@
   </head>
   <body>
     <header>
-      <h2 class="head">Make your groups here</h2>
-      <a class="home" href="../index.html">Home</a>
-      <form action="/logout?_method=DELETE" method="POST">
-        <button class="logout" type="submit" value="ignore" formnovalidate>
-          Log Out
-        </button>
-      </form>
+      <h2 class="head">Make your groups</h2>
+      <div class="nav">
+        <a class="home" href="../index.html">Home</a>
+        <a class="group" href="./group.html">Groups</a>
+        <form action="/logout?_method=DELETE" method="POST">
+          <button class="logout" type="submit" value="ignore" formnovalidate>
+            Log Out
+          </button>
+        </form>
+      </div>
     </header>
     <form class="form">
       <label for="group-name">Group name</label>

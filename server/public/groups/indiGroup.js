@@ -7,6 +7,7 @@ const header = document.querySelector(".head");
 const select = document.querySelector(".select");
 const inp = document.querySelector(".inp");
 const logout = document.querySelector(".logout");
+const leaveBtn = document.querySelector(".leave");
 const socket = io();
 let group;
 let complete = [],
@@ -44,8 +45,21 @@ document.addEventListener("DOMContentLoaded", getTodos);
 todoButton.addEventListener("click", addTodo);
 todoList.addEventListener("click", checkDelete);
 filterOption.addEventListener("click", filterTodo);
-
+leaveBtn.addEventListener("click", leaveGroup);
 //functions
+
+async function leaveGroup() {
+  var myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+  var requestOptions = {
+    method: "PUT",
+    headers: myHeaders,
+    redirect: "follow",
+  };
+  await fetch(`./api/indigroup/leavegroup/${groupID}`, requestOptions);
+  console.log("user left");
+  window.location.replace("/groups/group.html");
+}
 
 async function fetchname() {
   fetch(`./api/indigroup/getname/${groupID}`)

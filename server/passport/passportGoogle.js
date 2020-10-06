@@ -37,7 +37,7 @@ function initialiseGoogle(passport, getUserById) {
       {
         clientID: process.env.CLIENT_ID,
         clientSecret: process.env.CLIENT_SECRET,
-        callbackURL: "http://localhost:3000/auth/google/callback",
+        callbackURL: "https://dothetask.glitch.me/auth/google/callback",
       },
       authenticateFromGoggle
     )

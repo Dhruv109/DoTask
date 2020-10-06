@@ -127,6 +127,7 @@ app.use(function (req, res, next) {
 });
 
 app.use(express.static(path.join(__dirname, "/public/")));
+app.use(express.static(path.join(__dirname, "/public/groups")));
 
 io.on("connection", (socket) => {
   //catching todo

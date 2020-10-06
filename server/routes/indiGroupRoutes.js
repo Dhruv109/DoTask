@@ -72,6 +72,15 @@ router.get("/getcomplete/:id", async (req, res) => {
     res.send(err);
   }
 });
+router.get("/getmembers/:id", async (req, res) => {
+  try {
+    const { members } = await Group.findOne({ _id: req.params.id });
+    // console.log(todo);
+    res.send(members);
+  } catch (err) {
+    res.send(err);
+  }
+});
 router.put("/deletecomplete/:id", async (req, res) => {
   try {
     const index = req.body.index;
@@ -152,7 +161,6 @@ router.put("/leavegroup/:id", async (req, res) => {
       { _id: user.user._id },
       { $pull: { groups: mongoose.Types.ObjectId(req.params.id) } }
     );
-    console.log("user leaving", req.params.id, user.user._id, myUser);
     res.send("user leaving");
   } catch (error) {
     console.log(error);

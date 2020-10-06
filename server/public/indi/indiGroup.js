@@ -8,6 +8,7 @@ const select = document.querySelector(".select");
 const inp = document.querySelector(".inp");
 const logout = document.querySelector(".logout");
 const leaveBtn = document.querySelector(".leave");
+const memberList = document.querySelector(".member-list");
 const socket = io();
 let group;
 let complete = [],
@@ -42,11 +43,28 @@ tl.fromTo(
 
 //event listeners
 document.addEventListener("DOMContentLoaded", getTodos);
+document.addEventListener("DOMContentLoaded", getMembers);
 todoButton.addEventListener("click", addTodo);
 todoList.addEventListener("click", checkDelete);
 filterOption.addEventListener("click", filterTodo);
 leaveBtn.addEventListener("click", leaveGroup);
 //functions
+
+async function getMembers() {
+  fetch(`/api/indigroup/getmembers/${groupID}`)
+    .then((res) => res.json())
+    .then((members) => {
+      members.forEach((member) => {
+        fetch(`/groups/api/group/getmembername/${member}`)
+          .then((res) => res.text())
+          .then((name) => {
+            let li = document.createElement("li");
+            li.innerText = name;
+            memberList.appendChild(li);
+          });
+      });
+    });
+}
 
 async function leaveGroup() {
   var myHeaders = new Headers();

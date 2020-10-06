@@ -26,6 +26,16 @@ router.post("/makegroup", async (req, res) => {
   }
 });
 
+router.get(`/getmembername/:id`, async (req, res) => {
+  try {
+    let member = await User.findOne({ email: req.params.id });
+    if (!member) member = await googleUser.findOne({ email: req.params.id });
+    if (member) res.send(member.name);
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 router.get("/getgroups", async (req, res) => {
   const myuser = await getUser(req);
   const groups = myuser.user.groups;

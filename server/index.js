@@ -127,7 +127,6 @@ app.use(function (req, res, next) {
 });
 
 app.use(express.static(path.join(__dirname, "/public/")));
-app.use(express.static(path.join(__dirname, "/public/groups")));
 
 io.on("connection", (socket) => {
   //catching todo
@@ -148,7 +147,7 @@ app.get("/groups/indigroup", (req, res) => {
 //router use
 app.use("/api/user/", router);
 app.use("/groups/api/group/", groupRouter);
-app.use("/groups/api/indigroup/", indiGroupRouter);
+app.use("/api/indigroup/", indiGroupRouter);
 
 function checkNotAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {

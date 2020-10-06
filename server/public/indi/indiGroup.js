@@ -56,13 +56,13 @@ async function leaveGroup() {
     headers: myHeaders,
     redirect: "follow",
   };
-  await fetch(`./api/indigroup/leavegroup/${groupID}`, requestOptions);
+  await fetch(`/api/indigroup/leavegroup/${groupID}`, requestOptions);
   console.log("user left");
   window.location.replace("/groups/group.html");
 }
 
 async function fetchname() {
-  fetch(`./api/indigroup/getname/${groupID}`)
+  fetch(`/api/indigroup/getname/${groupID}`)
     .then((response) => response.text())
     .then((result) => {
       group = result;
@@ -117,7 +117,7 @@ function checkDelete(e) {
     });
   }
   if (item.classList[0] === "completed-btn") {
-    fetch(`./api/indigroup/getcomplete/${groupID}`)
+    fetch(`/api/indigroup/getcomplete/${groupID}`)
       .then((response) => response.json())
       .then((complete) => {
         const todo = item.parentElement;
@@ -126,7 +126,7 @@ function checkDelete(e) {
 
         const text = todo.children[1].innerText;
 
-        fetch(`./api/indigroup/gettodo/${groupID}`)
+        fetch(`/api/indigroup/gettodo/${groupID}`)
           .then((response) => response.json())
           .then((todos) => {
             const index = todos.indexOf(text);
@@ -150,7 +150,7 @@ function updatecomplete(index, value) {
     redirect: "follow",
   };
 
-  fetch(`./api/indigroup/updatecomplete/${groupID}`, requestOptions);
+  fetch(`/api/indigroup/updatecomplete/${groupID}`, requestOptions);
 }
 
 function filterTodo(e) {
@@ -191,17 +191,17 @@ function saveLocalTodos(todo) {
     redirect: "follow",
   };
 
-  fetch(`./api/indigroup/addtodo/${groupID}`, requestOptions);
-  fetch(`./api/indigroup/addwhosetodo/${groupID}`, requestOptions);
+  fetch(`/api/indigroup/addtodo/${groupID}`, requestOptions);
+  fetch(`/api/indigroup/addwhosetodo/${groupID}`, requestOptions);
 }
 
 function getTodos() {
   let names = [];
-  fetch(`./api/indigroup/whosetodo/${groupID}`)
+  fetch(`/api/indigroup/whosetodo/${groupID}`)
     .then((res) => res.json())
     .then((nameList) => (names = nameList));
 
-  fetch(`./api/indigroup/gettodo/${groupID}`)
+  fetch(`/api/indigroup/gettodo/${groupID}`)
     .then((response) => response.json())
     .then((todos) => {
       console.log(todos);
@@ -242,7 +242,7 @@ function getTodos() {
       }
       // const complete = JSON.parse(localStorage.getItem('complete'));
 
-      fetch(`./api/indigroup/getcomplete/${groupID}`)
+      fetch(`/api/indigroup/getcomplete/${groupID}`)
         .then((response) => response.json())
         .then((complete) => {
           const Todos = todoList.childNodes;
@@ -259,7 +259,7 @@ function getTodos() {
 function removelocalTodos(todo) {
   const deltodo = todo.children[1].innerText;
 
-  fetch(`./api/indigroup/gettodo/${groupID}`)
+  fetch(`/api/indigroup/gettodo/${groupID}`)
     .then((response) => response.json())
     .then((todos) => {
       const index = todos.indexOf(deltodo);
@@ -275,8 +275,8 @@ function removelocalTodos(todo) {
         body: raw,
         redirect: "follow",
       };
-      fetch(`./api/indigroup/deletecomplete/${groupID}`, requestOptions);
-      fetch(`./api/indigroup/deletewhosetodo/${groupID}`, requestOptions);
+      fetch(`/api/indigroup/deletecomplete/${groupID}`, requestOptions);
+      fetch(`/api/indigroup/deletewhosetodo/${groupID}`, requestOptions);
 
       const data2 = { todo: deltodo };
       var myHeaders = new Headers();
@@ -291,7 +291,7 @@ function removelocalTodos(todo) {
         redirect: "follow",
       };
 
-      fetch(`./api/indigroup/deletetodo/${groupID}`, requestOptions);
+      fetch(`/api/indigroup/deletetodo/${groupID}`, requestOptions);
     });
 }
 
@@ -309,11 +309,11 @@ function makeComplete() {
     redirect: "follow",
   };
 
-  fetch(`./api/indigroup/addcomplete/${groupID}`, requestOptions);
+  fetch(`/api/indigroup/addcomplete/${groupID}`, requestOptions);
 }
 
 async function fetchcomplete() {
-  fetch(`./api/indigroup/getcomplete/${groupID}`)
+  fetch(`/api/indigroup/getcomplete/${groupID}`)
     .then((response) => response.json())
     .then((res) => {
       complete = res;
@@ -321,7 +321,7 @@ async function fetchcomplete() {
 }
 
 async function fetchtodo() {
-  fetch(`./api/indigroup/gettodo/${groupID}`)
+  fetch(`/api/indigroup/gettodo/${groupID}`)
     .then((response) => response.json())
     .then((res) => {
       todos = res;

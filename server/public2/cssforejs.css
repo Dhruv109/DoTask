@@ -7,7 +7,7 @@
 }
 
 body {
-  background-image: linear-gradient(120deg, #f6d365, #f58b6e);
+  background-color: #cecece;
   color: white;
   font-family: "poppins", sans-serif;
   min-height: 100vh;
@@ -28,10 +28,12 @@ body {
 
 h2 {
   font-weight: bold;
+  font-size: 2rem;
+  color: white;
 }
 
 .container {
-  background-color: white;
+  background-color: #494949;
   color: black;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -70,7 +72,7 @@ form {
 }
 
 form label {
-  color: #6d6d6d;
+  color: white;
   margin-bottom: 0;
   padding: 0;
   font-size: 15px;
@@ -80,10 +82,11 @@ form label {
 
 form input {
   padding: 5px 5px;
-  background-color: #e0e0e0;
+  background-color: #666666;
   border: none;
-  color: #0f0f0f;
+  color: white;
   margin: 0;
+  font-size: clamp(15px, 1.5vw, 20px);
 }
 
 form div {
@@ -103,8 +106,10 @@ form div {
 form button {
   border: none;
   padding: 0.5em;
+  height: 35px;
   color: white;
-  background-color: #f58b6e;
+  background-color: #e99c37;
+  cursor: pointer;
 }
 
 .option {
@@ -115,6 +120,12 @@ form button {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   height: 15%;
 }
 
@@ -124,21 +135,26 @@ form button {
 }
 
 .option button {
-  border: 1px solid gray;
   background-color: white;
-  padding: 0.4em 2em;
+  width: 100px;
+  height: 35px;
   color: #4285f4;
+  cursor: pointer;
 }
 
 .register {
-  border-bottom: 1px dotted black;
+  border-bottom: 1px dotted orange;
+  color: orange;
+}
+
+p {
+  color: #aaaaaa;
 }
 
 a,
 a:hover,
 a:focus {
   text-decoration: none;
-  color: black;
   cursor: pointer;
 }
 
@@ -148,7 +164,7 @@ h4 {
 }
 
 .register-form {
-  height: 50%;
+  height: 40%;
 }
 
 .register-form button {

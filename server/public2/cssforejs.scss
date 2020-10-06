@@ -6,7 +6,8 @@
 }
 
 body {
-  background-image: linear-gradient(120deg, #f6d365, #f58b6e);
+  // background-image: linear-gradient(120deg, #f6d365, #f58b6e);
+  background-color: rgb(206, 206, 206);
   color: white;
   font-family: "poppins", sans-serif;
   min-height: 100vh;
@@ -18,9 +19,11 @@ body {
 
 h2 {
   font-weight: bold;
+  font-size: 2rem;
+  color: white;
 }
 .container {
-  background-color: white;
+  background-color: rgb(73, 73, 73);
   color: black;
   display: flex;
   flex-direction: column;
@@ -39,7 +42,7 @@ form {
   justify-content: space-between;
   height: 35%;
   label {
-    color: rgb(109, 109, 109);
+    color: rgb(255, 255, 255);
     margin-bottom: 0;
     padding: 0;
     font-size: 15px;
@@ -47,10 +50,11 @@ form {
   }
   input {
     padding: 5px 5px;
-    background-color: rgb(224, 224, 224);
+    background-color: rgb(102, 102, 102);
     border: none;
-    color: rgb(15, 15, 15);
+    color: rgb(255, 255, 255);
     margin: 0;
+    font-size: clamp(15px, 1.5vw, 20px);
   }
   div {
     display: flex;
@@ -61,34 +65,42 @@ form {
   button {
     border: none;
     padding: 0.5em;
+    height: 35px;
     color: white;
-    background-color: #f58b6e;
+    background-color: #e99c37;
+    cursor: pointer;
   }
 }
 .option {
   display: flex;
   flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
   height: 15%;
   p {
     color: rgb(189, 189, 189);
     font-size: 15px;
   }
   button {
-    border: 1px solid gray;
     background-color: white;
-    padding: 0.4em 2em;
+    width: 100px;
+    height: 35px;
     color: #4285f4;
+    cursor: pointer;
   }
 }
 .register {
-  border-bottom: 1px dotted black;
+  border-bottom: 1px dotted orange;
+  color: orange;
 }
 
+p {
+  color: rgb(170, 170, 170);
+}
 a,
 a:hover,
 a:focus {
   text-decoration: none;
-  color: black;
   cursor: pointer;
 }
 
@@ -97,7 +109,7 @@ h4 {
   color: rgb(204, 48, 48);
 }
 .register-form {
-  height: 50%;
+  height: 40%;
   button {
     margin-top: 1em;
   }

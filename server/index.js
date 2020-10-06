@@ -9,7 +9,8 @@ const session = require("express-session");
 const path = require("path");
 const mongoose = require("mongoose");
 const methodOverride = require("method-override");
-require("dotenv").config({ path: __dirname + "/.env" });
+if (process.env.NODE_ENV !== "production")
+  require("dotenv").config({ path: __dirname + "/.env" });
 const User = require("./models/user");
 const googleUser = require("./models/googleUser");
 const socketio = require("socket.io");

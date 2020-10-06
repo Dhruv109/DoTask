@@ -99,7 +99,7 @@ app.post("/register", checkNotAuthenticated, async (req, res) => {
 });
 
 app.post(
-  "./login",
+  "/login",
   checkNotAuthenticated,
   passport.authenticate("local", {
     successRedirect: "/",

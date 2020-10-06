@@ -75,6 +75,17 @@ socket.on("todoValue", ({ todo, name }) => {
   console.log(todo, name);
   addTodoDiv(todo, name);
 });
+socket.on("comp_index", (index) => {
+  todoList.children[index].children[1].classList.toggle("completed");
+  todoList.children[index].children[2].classList.toggle("green");
+});
+socket.on("del_index", (index) => {
+  let todo = todoList.children[index];
+  todo.classList.add("fall");
+  todo.addEventListener("transitionend", () => {
+    todo.remove();
+  });
+});
 
 function addTodo(event) {
   //prevent default action ie form to submit
@@ -112,6 +123,7 @@ function checkDelete(e) {
     const todo = item.parentElement;
     todo.classList.add("fall");
     removelocalTodos(todo);
+
     todo.addEventListener("transitionend", () => {
       todo.remove();
     });
@@ -130,7 +142,7 @@ function checkDelete(e) {
           .then((response) => response.json())
           .then((todos) => {
             const index = todos.indexOf(text);
-
+            socket.emit("complete_index", index);
             updatecomplete(index, !complete[index]);
             console.log(index, complete, text, todos);
           });
@@ -263,6 +275,7 @@ function removelocalTodos(todo) {
     .then((response) => response.json())
     .then((todos) => {
       const index = todos.indexOf(deltodo);
+      socket.emit("delete_index", index);
       const data = { index: index };
       var myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/json");

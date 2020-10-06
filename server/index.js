@@ -135,6 +135,12 @@ io.on("connection", (socket) => {
     socket.on("todo", ({ todo, name }) => {
       io.to(group).emit("todoValue", { todo, name });
     });
+    socket.on("complete_index", (index) => {
+      socket.broadcast.to(group).emit("comp_index", index);
+    });
+    socket.on("delete_index", (index) => {
+      socket.broadcast.to(group).emit("del_index", index);
+    });
   });
 });
 

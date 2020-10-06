@@ -54,5 +54,6 @@ groupList.addEventListener("click", openGroupPage);
 function openGroupPage(e) {
   const groupid = e.target.querySelector(".group-id").innerText;
   sessionStorage.setItem("group", JSON.stringify(groupid));
-  window.location.href = "./indigroup.html";
+  window.location.href = "/";
+  // fetch("/groups/indigroup");
 }

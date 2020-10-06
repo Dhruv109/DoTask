@@ -141,7 +141,9 @@ io.on("connection", (socket) => {
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname + "/public/", `index.html`));
 });
-
+app.get("/groups/indigroup", (req, res) => {
+  res.sendFile(path.join(__dirname + "/public/groups", `indigroup.html`));
+});
 //router use
 app.use("/api/user/", router);
 app.use("/groups/api/group/", groupRouter);
